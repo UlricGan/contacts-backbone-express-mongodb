@@ -1,0 +1,148 @@
+*{
+  font-size: 20px;
+  font-family: 'Brokman-Regular','Helvetica Neue',Helvetica,sans-serif;
+}
+
+ul{
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+dd,dt{
+  display: inline-block;
+  margin: 10px 0;
+}
+
+dt{
+  width: 100px;
+  text-align: right;
+}
+
+dd{
+  margin-left: 30px;
+}
+
+#contact_list{
+  float: left;
+}
+
+#main{
+  position: relative;
+  margin-top: 23px;
+  width: 300px;
+}
+
+#main ul{
+  border-top: 4px #cdcdcd solid;
+  border-bottom: 4px #cdcdcd solid;
+  width: 300px;  
+  height: 475px;
+  overflow-y: scroll;
+  position: relative;
+}
+
+#main .down, #main .up{
+  -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+  filter: alpha(opacity=50);
+  opacity: 0.5;
+  position: absolute;
+  left: 45%;
+}
+
+#main .down{
+  -webkit-animation:scrollDown 0.35s linear infinite alternate;
+  -moz-animation:scrollDown 0.35s linear infinite alternate;
+  -ms-animation:scrollDown 0.35s linear infinite alternate;
+  -o-animation:scrollDown 0.35s linear infinite alternate;
+  animation:scrollDown 0.35s linear infinite alternate;
+}
+
+#main .up{
+  -webkit-animation:scrollup 0.35s linear infinite alternate;
+  -moz-animation:scrollup 0.35s linear infinite alternate;
+  -ms-animation:scrollup 0.35s linear infinite alternate;
+  -o-animation:scrollup 0.35s linear infinite alternate;
+  animation:scrollup 0.35s linear infinite alternate;
+}
+
+@-webkit-keyframes scrollDown{
+  from {top:93%;}
+  to   {top:95%;}
+}
+@-moz-keyframes scrollDown{
+  from {top:93%;}
+  to   {top:95%;}
+}
+@keyframes scrollDown{
+  from {top:93%;}
+  to   {top:95%;}
+}
+@-o-keyframes scrollDown{
+  from {top:93%;}
+  to   {top:95%;}
+}
+
+@keyframes scrollup {
+ from {top: 3%;}
+ to {top: 1%;}
+}
+
+@-moz-keyframes scrollup {
+ from {top: 3%;}
+ to {top: 1%;}
+}
+
+@-webkit-keyframes scrollup {
+ from {top: 3%;}
+ to {top: 1%;}
+}
+
+@-ms-keyframes scrollup {
+ from {top: 3%;}
+ to {top: 1%;}
+}
+
+@-o-keyframes scrollup {
+ from {top: 3%;}
+ to {top: 1%;}
+}
+
+
+a{
+  /*display: block;
+  border-top:1px #acacac dashed;
+  cursor: pointer;
+  padding: 5px 0;*/
+  cursor: pointer;
+}
+
+
+#main a:hover{
+  background-color: #f0efef;
+}
+
+#main a.clicked{
+  background-color: #428bca;
+  color: white;
+}
+
+.navbar-form{
+  padding-left: 0;
+}
+
+#contact_detail{
+  float: left;
+  margin-left: 50px;
+  height: 550px;
+  position: relative;
+}
+
+.btn-group{
+  position: absolute;
+  bottom:0;
+}
+
+.is-hidden{
+  display: none;
+}

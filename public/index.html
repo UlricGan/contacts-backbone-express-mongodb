@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Address List</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="http://cdn.bootcss.com/twitter-bootstrap/3.0.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/mystyle.css">
+    <!--<script src="script/behaviour.js" style="text/javascript"></script>-->
+  </head>
+  <body>
+    <div class="container">
+    <div id="contact_list">
+      <form class="navbar-form">
+        <div class="form-group">
+        <input type="text" name="cname" class="form-control input-lg" placeholder="Name" id="cname">
+        </div>
+        <button type="button" class="btn btn-default btn-lg" id="add">Add</button>
+      </form>
+      <div id="main">
+      <ul class="list-group">
+        
+      </ul>
+      <span class='glyphicon glyphicon-chevron-down down'></span>
+      <span class='glyphicon glyphicon-chevron-up up'></span>
+      </div>
+    </div>
+    <div id="contact_detail">
+      <div id="detail"></div>
+    </div>
+    <script type="text/template" id="contact-detail">
+      <div class="showInfo">
+        <dl>
+          <dt>Name</dt>
+          <dd><%= name %></dd>
+          <br/>
+          <dt>Phone</dt>
+          <dd><%= phone %></dd>
+          <br/>
+          <dt>Email</dt>
+          <dd><%= email %></dd>
+          <br/>
+          <dt>Address</dt>
+          <dd><%= address %></dd>
+        </dl>
+        <br/>
+        <form>
+          <input type="text" id="editName" value="<%= name %>"><br/>
+          <input type="text" id="editPhone" value="<%= phone %>"><br/>
+          <input type="text" id="editEmail" value="<%= email %>"><br/>
+          <input type="text" id="editAddress" value="<%= address %>">
+        </form>
+      </div>
+      <div class="btn-group">
+        <button type="button" class="btn btn-default btn-lg js-operate">编辑</button>
+        <button type="button" class="btn btn-default btn-lg js-remove">删除</button>
+      </div>
+    </script>
+    <script type="text/template" id="contact-item">
+      <a class="list_name list-group-item"><%= name %></a>
+    </script>
+
+    
+    <script src="/js/lib/jquery-1.10.2.min.js"></script>
+    <script src="http://cdn.bootcss.com/twitter-bootstrap/3.0.2/js/bootstrap.min.js"></script>
+    <script src="/js/lib/underscore-min.js"></script>
+    <script src="/js/lib/backbone-min.js"></script>
+    <script src="/js/models/contact.js"></script>
+    <script src="/js/collections/contacts.js"></script>
+    <script src="/js/views/detailView.js"></script>
+    <script src="/js/views/itemView.js"></script>
+    <script src="/js/views/app.js"></script>
+
+    <script type="text/javascript">
+      var app= app || {};
+
+      $(function(){
+        new app.AppView();
+      });
+    </script>
+  </body>
+</html>
