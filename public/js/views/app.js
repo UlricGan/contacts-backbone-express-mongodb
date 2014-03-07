@@ -5,7 +5,8 @@ app.AppView=Backbone.View.extend({
 	el: '.container',
 
 	events: {
-		'click #add': 'createContact'
+		'click #add': 'createContact',
+		'keyup #cname': 'searchName'
 	},
 
 	initialize: function(){
@@ -14,7 +15,6 @@ app.AppView=Backbone.View.extend({
 
 		this.listenTo(app.contacts, 'add', this.addOne);
 		this.listenTo(app.contacts, 'reset', this.addAll);
-		this.listenTo(app.contacts, 'remove', this.addAll);
 
 		app.contacts.fetch();
 
@@ -26,7 +26,7 @@ app.AppView=Backbone.View.extend({
 	},
 
 	addAll: function(){
-		this.$list.html();
+		this.$list.html('');
 		app.contacts.each(this.addOne, this);
 	},
 
@@ -34,6 +34,30 @@ app.AppView=Backbone.View.extend({
 		var newContact=new app.Contact();
 		var view=new app.DetailView({model: newContact});
 		this.$detail.html(view.transform().render().el);
+	},
+
+	searchName: function(){
+		var searchValue=$('#cname').val(),
+				searchResult=[],
+				regValue='',
+				matchValue;
+		if(!searchValue){
+			this.addAll();
+		}else{
+
+			console.log(searchValue);
+			for(var i=0; i<searchValue.length; i++){
+				regValue+='['+searchValue[i]+']+\\w*';
+			}
+			matchValue=new RegExp(regValue);
+			app.contacts.each(function(contact){
+				if(contact.get('name').search(matchValue)!=-1){
+					searchResult.push(contact);
+				}
+			});
+			this.$list.html('');
+			searchResult.forEach(this.addOne,this);
+		}
 	}
 
 });

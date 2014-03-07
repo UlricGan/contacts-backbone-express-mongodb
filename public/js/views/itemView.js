@@ -12,6 +12,7 @@ app.ItemView=Backbone.View.extend({
 
 	initialize: function(){
 		this.listenTo(this.model, 'change:name', this.render);
+		this.listenTo(this.model, 'remove', this.clear);
 	},
 
 	render: function(){
@@ -24,6 +25,10 @@ app.ItemView=Backbone.View.extend({
 
 		var view =new app.DetailView({model: this.model});
 		$('#detail').html(view.render().el);
+	},
+
+	clear: function(){
+		this.remove();
 	}
 
 
