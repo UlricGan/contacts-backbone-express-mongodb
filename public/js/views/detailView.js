@@ -16,9 +16,6 @@ app.DetailView=Backbone.View.extend({
 		'click .js-remove': 'clear'
 	},
 
-	initialize: function(){
-	},
-
 	render: function(){
 
 		this.$el.html(this.detailTemplate(this.model.toJSON()));
@@ -76,9 +73,7 @@ app.DetailView=Backbone.View.extend({
 	},
 
 	saveAdd: function(){
-
 		this.model.set(this.newAtr());
-
 		app.contacts.create(this.model);
 
 		this.showType='info';

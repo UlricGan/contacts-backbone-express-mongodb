@@ -138,6 +138,10 @@ a{
   position: relative;
 }
 
+.glyphicon{
+  z-index: 2;
+}
+
 .btn-group{
   position: absolute;
   bottom:0;

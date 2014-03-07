@@ -12,6 +12,7 @@ app.AppView=Backbone.View.extend({
 	initialize: function(){
 		this.$list=this.$('.list-group');
 		this.$detail=this.$('#detail');
+		this.$sInput=this.$('#cname');
 
 		this.listenTo(app.contacts, 'add', this.addOne);
 		this.listenTo(app.contacts, 'reset', this.addAll);
@@ -31,13 +32,14 @@ app.AppView=Backbone.View.extend({
 	},
 
 	createContact: function(){
+		this.$('.clicked').removeClass('clicked');
 		var newContact=new app.Contact();
 		var view=new app.DetailView({model: newContact});
 		this.$detail.html(view.transform().render().el);
 	},
 
 	searchName: function(){
-		var searchValue=$('#cname').val(),
+		var searchValue=this.$sInput.val(),
 				searchResult=[],
 				regValue='',
 				matchValue;

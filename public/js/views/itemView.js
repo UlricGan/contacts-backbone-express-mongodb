@@ -16,13 +16,18 @@ app.ItemView=Backbone.View.extend({
 	},
 
 	render: function(){
-		this.$el.html(this.itemTamplate(this.model.toJSON()));
-
+		if(this.$('a').hasClass('clicked') || this.model.isNew()){
+			this.$el.html(this.itemTamplate(this.model.toJSON()));
+			this.$('a').addClass('clicked');
+		}else{
+			this.$el.html(this.itemTamplate(this.model.toJSON()));
+		}
 		return this;
 	},
 
 	showDetail: function(){
-
+		$('.clicked').removeClass('clicked');
+		this.$('a').addClass('clicked');
 		var view =new app.DetailView({model: this.model});
 		$('#detail').html(view.render().el);
 	},
