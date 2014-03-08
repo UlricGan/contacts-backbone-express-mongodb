@@ -26,6 +26,7 @@ exports.findAll=function(req, res){
 	});
 };
 
+//未使用
 exports.detailInfo=function(req, res){
 	var id=req.params.id;
 	mongodb.open(function(err, db){
@@ -49,8 +50,6 @@ exports.detailInfo=function(req, res){
 
 exports.addCont=function(req, res){
 	var contact=req.body;
-	console.log('add!!!');
-	console.log(contact);
 	mongodb.open(function(err, db){
 		if(err){
 			res.send(err);
@@ -64,7 +63,7 @@ exports.addCont=function(req, res){
 				if(err){
 					res.send(err);
 				}
-				console.log('add result is '+result[0]);
+				console.log('adding is successful');
 				res.send(result[0]);
 			});
 		});
@@ -75,7 +74,6 @@ exports.addCont=function(req, res){
 exports.updateCont=function(req, res){
 	var contact=req.body,
 		id=req.params.id;
-	console.log(contact);
 	contact._id=new BSON.ObjectID(contact._id);
 	mongodb.open(function(err, db){
 		if(err){
@@ -85,16 +83,13 @@ exports.updateCont=function(req, res){
 			if(err){
 				res.send(err);
 			}
-			console.log('collection!!!!');
 			collection.update({'_id': new BSON.ObjectID(id)}, contact, {safe: true}, function(err, result){
 				mongodb.close();
 				if(err){
 					res.send(err);
-					console.log('update!!!!');
 				}
-				//console.log('update!!!!');
-				//console.log('update result is '+result[0]);
 				res.send(contact);
+				console.log('updating is successful');
 			});
 		});
 	});
@@ -115,7 +110,7 @@ exports.removeCont=function(req, res){
 				if(err){
 					res.send(err);
 				}
-				console.log('remove result is '+result);
+				console.log('removing is successful');
 				res.send(result[0]);
 			});
 		});
