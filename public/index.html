@@ -60,23 +60,41 @@
       <a class="list_name list-group-item"><%= name %></a>
     </script>
 
-    
-    <script src="/js/lib/jquery-1.10.2.min.js"></script>
-    <script src="http://cdn.bootcss.com/twitter-bootstrap/3.0.2/js/bootstrap.min.js"></script>
-    <script src="/js/lib/underscore-min.js"></script>
-    <script src="/js/lib/backbone-min.js"></script>
-    <script src="/js/models/contact.js"></script>
-    <script src="/js/collections/contacts.js"></script>
-    <script src="/js/views/detailView.js"></script>
-    <script src="/js/views/itemView.js"></script>
-    <script src="/js/views/app.js"></script>
+    <script type="text/javascript" src="/js/lib/sea-debug.js"></script>
 
     <script type="text/javascript">
-      var app= app || {};
+      seajs.config({
 
-      $(function(){
-        new app.AppView();
+        base: '/js/lib/',
+
+        alias: {
+          'jquery': 'jquery-1.10.2.min.js',
+          'underscore': 'underscore-min.js',
+          'backbone': 'backbone.js'
+        }
       });
+
+      seajs.use('/js/main');
+
+    </script>
+
+    
+    <!-- <script src="/js/lib/jquery-1.10.2.min.js"></script> -->
+    <script src="http://cdn.bootcss.com/twitter-bootstrap/3.0.2/js/bootstrap.min.js"></script>
+     <!-- <script src="/js/lib/underscore-min.js"></script>
+    // <script src="/js/lib/backbone-min.js"></script>
+    // <script src="/js/models/contact.js"></script>
+    // <script src="/js/collections/contacts.js"></script>
+    // <script src="/js/views/detailView.js"></script>
+    // <script src="/js/views/itemView.js"></script>
+    // <script src="/js/views/app.js"></script> -->
+
+    <script type="text/javascript">
+      // var app= app || {};
+
+      // $(function(){
+      //   new app.AppView();
+      // });
     </script>
   </body>
 </html>
