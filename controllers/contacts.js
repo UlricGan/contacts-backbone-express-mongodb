@@ -1,10 +1,6 @@
-var mongo=require('mongodb');
-var Server=mongo.Server;
-var Db=mongo.Db;
-var BSON=mongo.BSONPure;
+var mongodb=require('../models/db');
+var BSON=require('mongodb').BSONPure;
 
-var server=new Server('localhost', 27017, {auto_reconnect: true});
-var mongodb=new Db('contactsdb', server);
 
 exports.findAll=function(req, res){
 	mongodb.open(function(err, db){
