@@ -60,6 +60,7 @@ exports.addCont=function(req, res){
 					res.send(err);
 				}
 				console.log('adding is successful');
+				req.emitter.emit('change');
 				res.send(result[0]);
 			});
 		});
@@ -84,6 +85,7 @@ exports.updateCont=function(req, res){
 				if(err){
 					res.send(err);
 				}
+				req.emitter.emit('change');
 				res.send(contact);
 				console.log('updating is successful');
 			});
@@ -106,6 +108,7 @@ exports.removeCont=function(req, res){
 				if(err){
 					res.send(err);
 				}
+				req.emitter.emit('change');
 				console.log('removing is successful');
 				res.send(result[0]);
 			});

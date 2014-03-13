@@ -1,15 +1,22 @@
 var contacts = require('../controllers/contacts');
 
 
-module.exports=function(app){
+module.exports=function(app, emitter){
 
-	app.get('/contacts', contacts.findAll);
-	app.post('/contacts', contacts.addCont);
-	app.put('/contacts/:id', contacts.updateCont);
-	app.del('/contacts/:id', contacts.removeCont);
+	var addEvent=function(req, res, next){
+		if(!req.emitter){
+			req.emitter=emitter;
+		}
+		next();
+	};
+	
+	app.get('/contacts', addEvent, contacts.findAll);
+	app.post('/contacts', addEvent, contacts.addCont);
+	app.put('/contacts/:id', addEvent, contacts.updateCont);
+	app.del('/contacts/:id', addEvent, contacts.removeCont);
 
 	//未使用
-	app.get('/contacts/:id', contacts.detailInfo);
+	app.get('/contacts/:id', addEvent, contacts.detailInfo);
 
 };
 

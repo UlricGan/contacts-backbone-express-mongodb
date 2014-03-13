@@ -3,12 +3,18 @@
  * Module dependencies.
  */
 
-var express = require('express');
+var express= require('express');
 var http = require('http');
 var path = require('path');
+var socket=require('socket.io');
+var Emitter=require('events').EventEmitter;
 var routes=require('./config/routes');
+var emitter=new Emitter();
 
-var app = express();
+
+var app=express();
+var server=http.createServer(app);
+var io=socket.listen(server);
 
 // all environments
 app.set('port', process.env.PORT || 3000);
@@ -25,8 +31,17 @@ if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
-routes(app);
+routes(app, emitter);
 
-http.createServer(app).listen(app.get('port'), function(){
+
+server.listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
+});
+
+io.sockets.on('connection', function (socket){
+	console.log('connection!!!********!!!');
+	emitter.on('change', function(){
+		socket.emit('new');
+		console.log('It has changed');
+	});
 });
