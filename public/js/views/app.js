@@ -5,8 +5,8 @@ define(function(require, exports, module){
 	var _=require('underscore');
 	var DetailView=require('./detailView');
 	var ItemView=require('./itemView');
-	var contacts=require('/js/collections/contacts');
-	var Contact=require('/js/models/contact');
+	var contacts=require('../collections/contacts');
+	var Contact=require('../models/contact');
 
 	var AppView=Backbone.View.extend({
 

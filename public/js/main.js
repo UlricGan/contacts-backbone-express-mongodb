@@ -1,6 +1,6 @@
 define(function(require, exports, module){
 
-	var AppView=require('/js/views/app');
+	var AppView=require('./views/app');
 
 	new AppView();
 

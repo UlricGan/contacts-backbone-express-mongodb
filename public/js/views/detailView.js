@@ -2,6 +2,7 @@ define(function(require, exports, module){
 	var Backbone=require('backbone');
 	var $=require('jquery');
 	var _=require('underscore');
+	var contacts=require('../collections/contacts');
 
 	var DetailView=Backbone.View.extend({
 
@@ -76,7 +77,7 @@ define(function(require, exports, module){
 
 		saveAdd: function(){
 			this.model.set(this.newAtr());
-			app.contacts.create(this.model);
+			contacts.create(this.model);
 
 			this.showType='info';
 			this.render();

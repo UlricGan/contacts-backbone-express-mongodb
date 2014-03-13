@@ -3,7 +3,7 @@ define(function(require, exports, module){
 	var Backbone=require('backbone');
 	var $ =require('jquery');
 	var _ =require('underscore');
-	var DetailView=require('/js/views/detailView');
+	var DetailView=require('../views/detailView');
 
 	var ItemView=Backbone.View.extend({
 
