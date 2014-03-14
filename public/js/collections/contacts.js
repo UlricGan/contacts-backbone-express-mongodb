@@ -1,11 +1,17 @@
-var app = app || {};
+define(function(require, exports, module){
+	var Backbone=require('backbone');
+	var Contact=require('../models/contact');
 
-var Contacts=Backbone.Collection.extend({
+	var Contacts=Backbone.Collection.extend({
 
-	model: app.Contact,
+		model: Contact,
 
-	url: '/contacts'
+		url: '/contacts'
+
+	});
+
+	module.exports=new Contacts();
+
+
 
 });
-
-app.contacts=new Contacts();

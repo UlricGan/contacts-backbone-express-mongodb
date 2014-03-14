@@ -1,65 +1,77 @@
-var app= app || {};
+define(function(require, exports, module){
 
-app.AppView=Backbone.View.extend({
+	var Backbone=require('backbone');
+	var $=require('jquery');
+	var _=require('underscore');
+	var DetailView=require('./detailView');
+	var ItemView=require('./itemView');
+	var contacts=require('../collections/contacts');
+	var Contact=require('../models/contact');
 
-	el: '.container',
+	var AppView=Backbone.View.extend({
 
-	events: {
-		'click #add': 'createContact',
-		'keyup #cname': 'searchName'
-	},
+		el: '.container',
 
-	initialize: function(){
-		this.$list=this.$('.list-group');
-		this.$detail=this.$('#detail');
-		this.$sInput=this.$('#cname');
+		events: {
+			'click #add': 'createContact',
+			'keyup #cname': 'searchName'
+		},
 
-		this.listenTo(app.contacts, 'add', this.addOne);
-		this.listenTo(app.contacts, 'reset', this.addAll);
+		initialize: function(){
+			this.$list=this.$('.list-group');
+			this.$detail=this.$('#detail');
+			this.$sInput=this.$('#cname');
 
-		app.contacts.fetch();
+			this.listenTo(contacts, 'add', this.addOne);
+			this.listenTo(contacts, 'reset', this.addAll);
 
-	},
+			contacts.fetch();
 
-	addOne: function(contact){
-		var view= new app.ItemView({model: contact});
-		this.$list.append(view.render().el);
-	},
+		},
 
-	addAll: function(){
-		this.$list.html('');
-		app.contacts.each(this.addOne, this);
-	},
+		addOne: function(contact){
+			var view= new ItemView({model: contact});
+			this.$list.append(view.render().el);
+		},
 
-	createContact: function(){
-		this.$('.clicked').removeClass('clicked');
-		var newContact=new app.Contact();
-		var view=new app.DetailView({model: newContact});
-		this.$detail.html(view.transform().render().el);
-	},
-
-	searchName: function(){
-		var searchValue=this.$sInput.val(),
-				searchResult=[],
-				regValue='',
-				matchValue;
-		if(!searchValue){
-			this.addAll();
-		}else{
-
-			console.log(searchValue);
-			for(var i=0; i<searchValue.length; i++){
-				regValue+='['+searchValue[i]+']+\\w*';
-			}
-			matchValue=new RegExp(regValue);
-			app.contacts.each(function(contact){
-				if(contact.get('name').search(matchValue)!=-1){
-					searchResult.push(contact);
-				}
-			});
+		addAll: function(){
 			this.$list.html('');
-			searchResult.forEach(this.addOne,this);
+			contacts.each(this.addOne, this);
+		},
+
+		createContact: function(){
+			this.$('.clicked').removeClass('clicked');
+			var newContact=new Contact();
+			var view=new DetailView({model: newContact});
+			this.$detail.html(view.transform().render().el);
+		},
+
+		searchName: function(){
+			var searchValue=this.$sInput.val(),
+					searchResult=[],
+					regValue='',
+					matchValue;
+			if(!searchValue){
+				this.addAll();
+			}else{
+
+				console.log(searchValue);
+				for(var i=0; i<searchValue.length; i++){
+					regValue+='['+searchValue[i]+']+\\w*';
+				}
+				matchValue=new RegExp(regValue);
+				contacts.each(function(contact){
+					if(contact.get('name').search(matchValue)!=-1){
+						searchResult.push(contact);
+					}
+				});
+				this.$list.html('');
+				searchResult.forEach(this.addOne,this);
+			}
 		}
-	}
+
+	});
+
+	module.exports=AppView;
 
 });

@@ -60,31 +60,28 @@
       <a class="list_name list-group-item"><%= name %></a>
     </script>
 
-    
-    <script src="/js/lib/jquery-1.10.2.min.js"></script>
-    <script src="http://cdn.bootcss.com/twitter-bootstrap/3.0.2/js/bootstrap.min.js"></script>
-    <script src="/js/lib/underscore-min.js"></script>
-    <script src="/js/lib/backbone-min.js"></script>
-    <script src="/js/models/contact.js"></script>
-    <script src="/js/collections/contacts.js"></script>
-    <script src="/js/views/detailView.js"></script>
-    <script src="/js/views/itemView.js"></script>
-    <script src="/js/views/app.js"></script>
     <script src="/socket.io/socket.io.js"></script>
+    <script type="text/javascript" src="/js/lib/sea-debug.js"></script>
 
     <script type="text/javascript">
-      var app= app || {};
+      seajs.config({
 
-      var socket = io.connect('http://localhost');
+        base: '/js/lib/',
 
-      socket.on('new', function(){
-        console.log('client get the msg');
-        app.contacts.fetch();
+        alias: {
+          'jquery': 'jquery-1.10.2.min.js',
+          'underscore': 'underscore-min.js',
+          'backbone': 'backbone.js'
+        }
       });
 
-      $(function(){
-        new app.AppView();
-      });
+      seajs.use('/js/main');
+
     </script>
+
+    
+    <!-- <script src="/js/lib/jquery-1.10.2.min.js"></script> -->
+    <script src="http://cdn.bootcss.com/twitter-bootstrap/3.0.2/js/bootstrap.min.js"></script>
+    
   </body>
 </html>

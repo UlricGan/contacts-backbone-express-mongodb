@@ -1,40 +1,49 @@
-var app= app || {};
+define(function(require, exports, module){
 
-app.ItemView=Backbone.View.extend({
+	var Backbone=require('backbone');
+	var $ =require('jquery');
+	var _ =require('underscore');
+	var DetailView=require('../views/detailView');
 
-	tagName: 'li',
+	var ItemView=Backbone.View.extend({
 
-	itemTamplate: _.template($('#contact-item').html()),
+		tagName: 'li',
 
-	events: {
-		'click': 'showDetail'
-	},
+		itemTamplate: _.template($('#contact-item').html()),
 
-	initialize: function(){
-		this.listenTo(this.model, 'change:name', this.render);
-		this.listenTo(this.model, 'remove', this.clear);
-	},
+		events: {
+			'click': 'showDetail'
+		},
 
-	render: function(){
-		if(this.$('a').hasClass('clicked') || this.model.isNew()){
-			this.$el.html(this.itemTamplate(this.model.toJSON()));
+		initialize: function(){
+			this.listenTo(this.model, 'change:name', this.render);
+			this.listenTo(this.model, 'remove', this.clear);
+		},
+
+		render: function(){
+			if(this.$('a').hasClass('clicked') || this.model.isNew()){
+				this.$el.html(this.itemTamplate(this.model.toJSON()));
+				this.$('a').addClass('clicked');
+			}else{
+				this.$el.html(this.itemTamplate(this.model.toJSON()));
+			}
+			return this;
+		},
+
+		showDetail: function(){
+			$('.clicked').removeClass('clicked');
 			this.$('a').addClass('clicked');
-		}else{
-			this.$el.html(this.itemTamplate(this.model.toJSON()));
+			var view =new DetailView({model: this.model});
+			$('#detail').html(view.render().el);
+		},
+
+		clear: function(){
+			this.remove();
 		}
-		return this;
-	},
 
-	showDetail: function(){
-		$('.clicked').removeClass('clicked');
-		this.$('a').addClass('clicked');
-		var view =new app.DetailView({model: this.model});
-		$('#detail').html(view.render().el);
-	},
+	});
 
-	clear: function(){
-		this.remove();
-	}
+	module.exports=ItemView;
 
 
 });
