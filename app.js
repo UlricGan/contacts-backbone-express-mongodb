@@ -39,9 +39,7 @@ server.listen(app.get('port'), function(){
 });
 
 io.sockets.on('connection', function (socket){
-	console.log('connection!!!********!!!');
 	emitter.on('change', function(){
 		socket.emit('new');
-		console.log('It has changed');
 	});
 });
